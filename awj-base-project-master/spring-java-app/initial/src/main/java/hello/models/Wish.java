@@ -1,21 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hello;
 
-/**
- *
- * @author Ilinca
- */
 public class Wish {
-    private final String sir;
-    private final String nume;
 
-    public Wish(String sir, String nume) {
+    private  String sir;
+    private  String nume;
+    private  int id;
+
+    public Wish(String sir, String nume, int id) {
         this.sir = sir;
         this.nume = nume;
+        this.id = id;
+    }
+
+    public void setSir(String sir) {
+        this.sir = sir;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSir() {
@@ -25,5 +31,9 @@ public class Wish {
     public String getNume() {
         return nume;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
 }

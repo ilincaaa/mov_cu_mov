@@ -2,13 +2,13 @@
 package hello;
 
 public class Student {
-    private final String nume;
-    private final String prenume;
-    private final long id;
-    
-    public Student( long id,String nume, String prenume) {
+    private  String nume;
+    private  int grupa;
+    private  int id;
+
+    public Student(String nume, int grupa, int id) {
         this.nume = nume;
-        this.prenume = prenume;
+        this.grupa = grupa;
         this.id = id;
     }
 
@@ -16,17 +16,25 @@ public class Student {
         return nume;
     }
 
-    public String getPrenume() {
-        return prenume;
+    public int getGrupa() {
+        return grupa;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public void setGrupa(int grupa) {
+        this.grupa = grupa;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    
-    
-    
-    
-    
+   
 }

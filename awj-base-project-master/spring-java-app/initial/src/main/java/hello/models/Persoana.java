@@ -2,28 +2,30 @@ package hello;
 
 public class Persoana {
 
-    private final String _name;
-    private final String _surname;
-    private final int _age;
+    private String name;
+    private int id;
 
-    public Persoana(String _name, String _surname, int _age) {
-        this._name = _name;
-        this._surname = _surname;
-        this._age = _age;
+    public Persoana() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Persoana(int id, String name) {
+        this.name = name;
+        this.id = id;
     }
 
     public String getName() {
-        return _name;
+        return this.name;
     }
 
-    public String getSurname() {
-        return _surname;
+    public int getId() {
+        return this.id;
     }
-
-    public int getAge() {
-        return _age;
-    }
-    
-    
-
 }
