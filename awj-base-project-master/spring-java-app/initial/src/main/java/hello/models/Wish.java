@@ -35,5 +35,8 @@ public class Wish {
     public int getId() {
         return id;
     }
+    
+      public Wish() {
+    }
 
 }

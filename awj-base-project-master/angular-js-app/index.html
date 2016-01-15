@@ -35,15 +35,87 @@
 
   <div class="container">
     <div ng-controller="HomeController">
-      <h1>{{ helloWorld }}</h1>
-      <p>Writing this live into the browser...</p>
+      <h1 ng-click="doStuff()">{{ helloWorld }}</h1>
     </div>
   </div>
 
   <hr/>
 
-  <!-- /resources1 -->
-  <div class="container">
+
+<!-- /Persoana -->
+  <div class="container" ng-controller="HomeController">
+   <h1 id="#pe">Person</h1>
+    <h2>List all persons</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="pers in persoane" data-id="{{pers.id}}">
+        <td>{{ pers.name }}</td>
+        <td>{{ pers.id }}</td>
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdatePerson(pers)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deletePersoana(pers.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Add new person</h2>
+    <table>
+    <tr>
+    <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="person.id"/></td>
+  
+    </tr>
+    <tr>
+    <td>Name</td>
+    <td><input type="text" class="form-control" ng-model="person.name"/></td>
+        </tr>
+    <tr>
+    <td colspan="2">
+   <button ng-click="addPersoana(person)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+
+        <h2>Edit a person</h2>
+        <table>
+       <tr>
+        <td>Id</td>
+        <td><input type="text" class="form-control" ng-model="editPerson.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" class="form-control" ng-model="editPerson.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updatePerson()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
+  </div>
+  </div>
+  <hr/>
+
+  <!-- /Student-->
+   <div class="container" ng-controller="StudentController">
     <h1 id="#st">Student</h1>
     
        <div class="col-md-12">
@@ -52,15 +124,13 @@
       </div>
     <table class="table table-bordered">
       <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Class</th>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>247</td>
-        <td>Nelu</td>
-        <td>332</td>
+      <tr ng-repeat="stud in studenti" data-id="{{stud.id}}">
+		<td>{{stud.nume }}</td>
+        <td>{{stud.grupa}}</td>
+        <td>{{stud.id}}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -68,134 +138,82 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+         <button ng-click="setUpdateStudent(stud)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+		<button ng-click="deleteStudent(stud.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
+		</button>
           </a>
         </td>
       </tr>
-      <tr>
-        <td>452</td>
-        <td>Lilian</td>
-        <td>334</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
+    </table>
+
+      <h2>Edit a student</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editStudent.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" class="form-control" ng-model="editStudent.nume"></td>
+       </tr>
+        <tr>
+         <td>Grupa</td>
+         <td><input type="text" class="form-control" ng-model="editStudent.grupa"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateStudent()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
+
+      <h2>Add new student</h2>
+    <table>
+	   <tr>
+		<td>ID</td>
+        <td><input type="text" class="form-control" ng-model="student.id"/></td>
+	   </tr>
+	   <tr>
+		<td>Nume</td>
+		<td><input type="text" class="form-control" ng-model="student.nume"/></td>
+       </tr>
+        <tr>
+		<td>Grupa</td>
+		<td><input type="text" class="form-control" ng-model="student.grupa"/></td>
+       </tr>
+	   <tr>
+		<td colspan="2">
+			<button ng-click="addStudent(student)" class="btn btn-primary btn-xs">Add</button>
         </td>
-      </tr>
-      <tr>
-        <td>892</td>
-        <td>Mini</td>
-        <td>324</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-</table>
-
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit student</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Class</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Class">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Adauga un student</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label for="attribute3">Class</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Class">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
+	   </tr>
+	  </table>
     </div>
 
 
   <hr/>
-
-  <!-- /resources2-->
-  <div class="container">
+  
+    <!-- /Wish-->
+  <div class="container" ng-controller="WishController">
     <h1 id="wi">Wish</h1>
     <div class="col-md-12">
-           <h2 class="col-md-4">List of wishes</h2>
-           <img class="col-md-4" src="http://clipartzebraz.com/cliparts/sparkle-clip-art/cliparti1_sparkle-clip-art_02.jpg" class="img-thumbnail"/> 
+           <h2 class="col-md-4">List of wishes</h2> 
       </div>
-    <table class="table table-bordered">
+   <table class="table table-bordered">
       <tr>
-        <th>Id</th>
-        <th>Wish</th>
-        <th>Name</th> 
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>6273</td>
-        <td>Joy</td>
-        <td>Ion</td>
+      <tr ng-repeat="wish in wishes" data-id="{{wish.id}}">
+		<td>{{ wish.sir }}</td>
+        <td>{{wish.nume}}</td>
+        <td>{{wish.id}}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -203,135 +221,82 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+         <button ng-click="setUpdateWish(wish)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+		<button ng-click="deleteWish(wish.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6773</td>
-        <td>Freedom</td>
-        <td>Sara</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6999</td>
-        <td>Love</td>
-        <td>Matei</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+		</button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a wish</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-            <div class="form-group">
-            <label for="attribute2">Wish</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Wish">
-          </div>           
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
+   <h2>Edit a wish</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editWish.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" class="form-control" ng-model="editWish.nume"></td>
+       </tr>
+        <tr>
+         <td>Wish</td>
+         <td><input type="text" class="form-control" ng-model="editWish.sir"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateWish()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
 
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a wish</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-            <div class="form-group">
-            <label for="attribute2">Wish</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Wish">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
+      <h2>Add new wish</h2>
+    <table>
+	   <tr>
+		<td>ID</td>
+        <td><input type="text" class="form-control" ng-model="wish.id"/></td>
+		
+	   </tr>
+	   <tr>
+		<td>Name</td>
+		<td><input type="text" class="form-control" ng-model="wish.nume"/></td>
+       </tr>
+        <tr>
+		<td>Wish</td>
+		<td><input type="text" class="form-control" ng-model="wish.sir"/></td>
+       </tr>
+	   <tr>
+		<td colspan="2">
+			<button ng-click="addWish(wish)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+	   </tr>
+	  </table>
     </div>
 
-  </div>
-
-  <hr/>
-      
-<!-- /resources3-->
-  <div class="container">
-    <h1 id="fo">Food</h1>
-    <div class="col-md-12">
-           <h2 class="col-md-4">List of food</h2>
-           <img class="col-md-4" src="https://static1.squarespace.com/static/553b26fde4b08ceb08a4242c/553b2823e4b0eb3719c6d635/553b2836e4b0eb3719c7cbf1/1416776926043/1000w/watermelon.jpg" class="img-thumbnail"/> 
-      </div>
+   <hr/>
+ 
+      <!-- /Food-->
+   <div class="container" ng-controller="FoodController">
+    <h1 id="#fo">Food</h1>
+    <h2>List all food</h2>
     <table class="table table-bordered">
       <tr>
-        <th>Id</th>
-        <th>Type</th>
-        <th>Name</th> 
+          <img src="https://static1.squarespace.com/static/553b26fde4b08ceb08a4242c/553b2823e4b0eb3719c6d635/553b2836e4b0eb3719c7cbf1/1416776926043/1000w/watermelon.jpg" class="img-thumbnail"/> 
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>6273</td>
-        <td>Salad</td>
-        <td>Ion</td>
+      <tr ng-repeat="foo in foods" data-id="{{foo.id}}">
+        <td>{{ foo.nume }}</td>
+        <td>{{ foo.gen }}</td>
+        <td>{{ foo.id }}</td>
+          
         <td>
           <a href="">
             <span class="label label-success">
@@ -339,241 +304,67 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+         <button ng-click="setUpdateFood(foo)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+  <button ng-click="deleteFood(foo.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6773</td>
-        <td>Soup</td>
-        <td>Sara</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6999</td>
-        <td>Desert</td>
-        <td>Matei</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+  </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
+    <h2>Add new food</h2>
+    <table>
+    <tr>
+    <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="food1.id"/></td>
+  
+    </tr>
+    <tr>
+    <td>Nume</td>
+    <td><input type="text" class="form-control" ng-model="food1.nume"/></td>
+        </tr>
+    <tr>
+         <tr>
+    <td>Gen</td>
+        <td><input type="text" class="form-control" ng-model="food1.gen"/></td>
+  
+    </tr>
+    <td colspan="2">
+   <button ng-click="addFood(food1)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+
         <h2>Edit a type of food</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-            <div class="form-group">
-            <label for="attribute2">Type</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Type">
-          </div>           
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a type of food</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-            <div class="form-group">
-            <label for="attribute2">Type</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Type">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-
+        <table>
+       <tr>
+        <td>Id</td>
+        <td><input type="text" class="form-control" ng-model="editFood.id"></td>
+       </tr>
+       <tr>
+         <td>Nume</td>
+         <td><input type="text" class="form-control" ng-model="editFood.nume"></td>
+       </tr>
+            <tr>
+        <td>Gen</td>
+        <td><input type="text" class="form-control" ng-model="editFood.gen"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateFood()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
   </div>
-
+    
   <hr/>
-      
-<!-- /resources4-->
-  <div class="container">
-    <h1 id="pe">Person</h1>
-    <div class="col-md-12">
-           <h2 class="col-md-4">List of persons</h2>
-           <img class="col-md-4" src="http://imgs.xkcd.com/comics/names.png"/> 
-      </div>
-    <table class="table table-bordered">
-      <tr>
-        <th>Id</th>
-        <th>Name</th> 
-        <th style="width:210px;">Options</th>
-      </tr>
-      <tr>
-        <td>6273</td>
-        <td>Ion</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6773</td>
-        <td>Sara</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>6999</td>
-        <td>Matei</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-    </table>
-
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a person</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>          
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a person</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Id">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Name">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-
-  </div>
-
-  <hr/>
-
   <div class="container">
     <footer class="footer">
       <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>

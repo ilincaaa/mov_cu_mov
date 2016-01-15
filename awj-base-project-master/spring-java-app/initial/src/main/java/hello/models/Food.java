@@ -40,5 +40,11 @@ public class Food {
         this.id = id;
     }
     
+     public Food() {
+       
+    }
+    
+    
     
 }
+

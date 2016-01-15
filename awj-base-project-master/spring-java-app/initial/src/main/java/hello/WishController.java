@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
+
 
 
 @RestController
@@ -53,23 +55,21 @@ public class WishController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-@RequestMapping(value="/wish/{id}", method = RequestMethod.PUT)
-  public ResponseEntity modificare(@PathVariable("id") int id) {
+@RequestMapping(value="/wish/{id}/{nume}/{gen}", method = RequestMethod.PUT)
+ public List<Wish> update(@PathVariable("id") int id,@PathVariable("nume") String nume,@PathVariable("nume") String sir){
     for(Wish w : this.wishes) {
       if(w.getId() == id) {
-          w.setNume("Alice");
-          w.setSir("Money");
-        return new ResponseEntity<Wish>(w, new HttpHeaders(), HttpStatus.OK);
+         w.setNume(nume);
+         w.setSir(sir);
       }
     }
-    return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
+     return this.wishes;
   }
   
-  @RequestMapping(value="/wish/{nume}/{sir}", method = RequestMethod.POST)
-  public ResponseEntity adaugare(@PathVariable("nume") String nume,@PathVariable("sir") String sir) {
-         Wish w4 = new Wish(sir,nume,wishes.size()+1);
-         wishes.add(w4);
-         return new ResponseEntity<Wish>(w4, new HttpHeaders(), HttpStatus.OK);
+  @RequestMapping(value="/wish", method = RequestMethod.POST)
+   public ResponseEntity create(@RequestBody Wish w) {
+         wishes.add(w);
+         return new ResponseEntity<Wish>(w, new HttpHeaders(), HttpStatus.OK);
   }
 }
 

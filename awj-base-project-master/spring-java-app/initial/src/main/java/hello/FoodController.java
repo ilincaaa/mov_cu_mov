@@ -1,6 +1,7 @@
 
 package hello;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -53,23 +55,23 @@ public class FoodController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-@RequestMapping(value="/food/{id}", method = RequestMethod.PUT)
-  public ResponseEntity modificare(@PathVariable("id") int id) {
+@RequestMapping(value="/food/{id}/{nume}/{gen}", method = RequestMethod.PUT)
+ public List<Food> update(@PathVariable("id") int id,@PathVariable("nume") String nume,@PathVariable("gen") String gen) {
     for(Food f : this.mancare) {
       if(f.getId() == id) {
-          f.setNume("Sarmale");
-          f.setGen("Principal");
-        return new ResponseEntity<Food>(f, new HttpHeaders(), HttpStatus.OK);
+          f.setNume(nume);
+          f.setGen(gen);
+     
       }
     }
-    return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
+       return this.mancare;
   }
   
-  @RequestMapping(value="/food/{name}/{fel}", method = RequestMethod.POST)
-  public ResponseEntity adaugare(@PathVariable("name") String name,@PathVariable("fel") String fel) {
-         Food f4 = new Food(name,fel,mancare.size()+1);
-         mancare.add(f4);
-         return new ResponseEntity<Food>(f4, new HttpHeaders(), HttpStatus.OK);
+  @RequestMapping(value="/food", method = RequestMethod.POST)
+ public ResponseEntity create(@RequestBody Food f) {
+         mancare.add(f);
+         return new ResponseEntity<Food>(f, new HttpHeaders(), HttpStatus.OK);
   }
-}
 
+
+}

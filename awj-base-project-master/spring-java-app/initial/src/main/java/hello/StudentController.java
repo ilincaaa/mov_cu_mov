@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
+
 
 
 @RestController
@@ -53,23 +55,21 @@ public class StudentController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-@RequestMapping(value="/student/{id}", method = RequestMethod.PUT)
-  public ResponseEntity modificare(@PathVariable("id") int id) {
+@RequestMapping(value="/student/{id}/{nume}/{grupa}", method = RequestMethod.PUT)
+   public List<Student> update(@PathVariable("id") int id,@PathVariable("nume") String nume, @PathVariable("grupa") int grupa) {
     for(Student s : this.studenti) {
-      if(s.getId() == id) {
-          s.setNume("Nicu");
-          s.setGrupa(332);
-        return new ResponseEntity<Student>(s, new HttpHeaders(), HttpStatus.OK);
+       if(s.getId() == id)		  {
+		  s.setNume(nume);
+          s.setGrupa(grupa);
       }
     }
-    return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
+   return this.studenti;
   }
   
-  @RequestMapping(value="/student/{nume}/{grupa}", method = RequestMethod.POST)
-  public ResponseEntity adaugare(@PathVariable("nume") String nume,@PathVariable("grupa") String grupa) {
-         Student s4 = new Student(nume,Integer.parseInt(grupa),studenti.size()+1);
-         studenti.add(s4);
-         return new ResponseEntity<Student>(s4, new HttpHeaders(), HttpStatus.OK);
+  @RequestMapping(value="/student", method = RequestMethod.POST)
+  public ResponseEntity create(@RequestBody Student s) {
+	       studenti.add(s);
+    return new ResponseEntity<Student>(s, new HttpHeaders(), HttpStatus.OK);
   }
 }
 
